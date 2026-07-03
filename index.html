@@ -2,61 +2,173 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- 모바일 반응형을 위한 필수 태그 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>과목별 문제 풀이 사이트</title>
+    <title>용곡중 시험대비 문제모음</title>
     <style>
-        /* 기본 여백 초기화 */
+        /* Google & Gemini 디자인 시스템 정의 */
+        :root {
+            --google-blue: #1a73e8;
+            --google-gray-100: #f8f9fa;
+            --google-gray-200: #e8eaed;
+            --google-gray-700: #3c4043;
+            --text-primary: #1f1f1f;
+            --text-secondary: #5f6368;
+            --bg-surface: #ffffff;
+            /* Gemini 웹 애플리케이션 특유의 부드러운 라이트 블루 그레이 배경 */
+            --bg-container: #f0f4f9; 
+            /* Gemini의 상징적인 불꽃(Spark) 그라데이션 */
+            --gemini-gradient: linear-gradient(90deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
+        }
+
+        /* 기본 여백 초기화 및 박스 모델 설정 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Malgun Gothic', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Malgun Gothic", sans-serif;
+            background-color: var(--bg-container);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* 상단 헤더 영역 (Google/Gemini 스타일의 깔끔한 배치) */
         header {
-            background-color: #4CAF50;
-            color: white;
+            background-color: var(--bg-surface);
+            padding: 3rem 1.5rem;
             text-align: center;
-            padding: 1.5rem;
+            border-bottom: 1px solid var(--google-gray-200);
         }
 
-        main {
-            padding: 2rem;
-            max-width: 1000px;
+        .header-container {
+            max-width: 800px;
             margin: 0 auto;
         }
 
+        header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.75px;
+            /* Gemini 그라데이션 텍스트 효과 적용 */
+            background: var(--gemini-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* 메인 콘텐츠 영역 */
+        main {
+            padding: 3rem 1.5rem;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            padding-left: 0.25rem;
+        }
+
+        /* 과목 카드 레이아웃 (Grid) - 기본 모바일 1열 */
         .subject-container {
             display: grid;
-            /* 기본 모바일 화면: 1열 배치 */
-            grid-template-columns: 1fr; 
+            grid-template-columns: 1fr;
             gap: 1.5rem;
-            margin-top: 1.5rem;
         }
 
+        /* Gemini 스타일의 라운딩 처리가 들어간 카드 디자인 */
         .subject-card {
-            background: white;
+            background: var(--bg-surface);
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
+            border-radius: 24px; /* Gemini 특유의 둥근 모서리 */
+            border: 1px solid transparent;
+            /* 부드러운 머티리얼 입체감 그림자 */
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.1), 0 2px 6px 2px rgba(60,64,67,0.05);
+            text-align: left;
+            position: relative;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
+        /* 마우스 호버 시 왼쪽에서 나타나는 컬러 포인트 바 */
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--google-blue);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        /* 과목별 구글 고유 액센트 컬러 설정 */
+        .subject-card:nth-child(1)::before { background: #4285f4; } /* 국어 - Blue */
+        .subject-card:nth-child(2)::before { background: #ea4335; } /* 영어 - Red */
+        .subject-card:nth-child(3)::before { background: #fbbc05; } /* 수학 - Yellow */
+        .subject-card:nth-child(4)::before { background: #34a853; } /* 사회 - Green */
+        .subject-card:nth-child(5)::before { background: #ff6d00; } /* 과학 - Orange */
+        .subject-card:nth-child(6)::before { background: #46bdc6; } /* 역사 - Cyan */
+        .subject-card:nth-child(7)::before { background: #9b72cb; } /* 도덕 - Purple */
+
+        /* 카드 마우스 호버 효과 (부드럽게 위로 뜨면서 그림자 짙어짐) */
         .subject-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px 0 rgba(60,64,67,0.15), 0 8px 24px 3px rgba(60,64,67,0.1);
+            border-color: var(--google-gray-200);
         }
 
+        .subject-card:hover::before {
+            opacity: 1;
+        }
+
+        .subject-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .subject-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* 구글 스타일 화살표 아이콘 */
+        .arrow-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-secondary);
+            transition: fill 0.2s, transform 0.2s;
+        }
+
+        .subject-card:hover .arrow-icon {
+            fill: var(--google-blue);
+            transform: translateX(4px);
+        }
+
+        /* 반응형 미디어 쿼리 설정 */
         /* 태블릿 화면 (600px 이상): 2열 배치 */
         @media (min-width: 600px) {
             .subject-container {
@@ -64,8 +176,8 @@
             }
         }
 
-        /* PC 화면 (900px 이상): 3열 배치 */
-        @media (min-width: 900px) {
+        /* PC 화면 (960px 이상): 3열 배치 */
+        @media (min-width: 960px) {
             .subject-container {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -73,21 +185,75 @@
     </style>
 </head>
 <body>
+
     <header>
-        <h1>📝 문제 풀이 마스터</h1>
+        <div class="header-container">
+            <h1>용곡중 시험대비 문제모음</h1>
+            <p>원하는 과목을 선택하여 내신 시험을 완벽하게 대비하세요.</p>
+        </div>
     </header>
     
     <main>
-        <h2>과목을 선택하세요</h2>
+        <h2 class="section-title">학습 과목 선택</h2>
         
         <div class="subject-container">
-            <div class="subject-card">국어</div>
-            <div class="subject-card">영어</div>
-            <div class="subject-card">수학</div>
-            <div class="subject-card">한국사</div>
-            <div class="subject-card">과학탐구</div>
-            <div class="subject-card">사회탐구</div>
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">국어</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">교과서 단원별 핵심 지문 및 빈출 문제</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">영어</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">본문 암기 체크 및 핵심 문법·독해 연습</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">수학</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">개념 확인 문제부터 수준별 응용·고난도 유형</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">사회</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">주요 개념 요약 및 흐름 파악 실전 평가</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">과학</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">실험 탐구 분석 및 대단원별 모의고사</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">역사</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">시대별 핵심 연표 정리 및 객관식·서술형 대비</p>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-title-wrapper">
+                    <span class="subject-title">도덕</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                </div>
+                <p class="subject-desc">가치 판단 단원 이론 점검 및 단원별 퀴즈</p>
+            </div>
         </div>
     </main>
+
 </body>
 </html>
