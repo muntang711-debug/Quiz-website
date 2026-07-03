@@ -107,20 +107,18 @@
             color: var(--text-primary);
         }
 
-        /* 뒤로 가기 버튼 (Google 스타일 칩) */
+        /* 뒤로 가기 버튼 (아이콘 전용 둥근 버튼으로 수정) */
         .btn-back {
             background: transparent;
             border: 1px solid var(--google-gray-200);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            font-family: inherit;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
             transition: all 0.2s;
         }
 
@@ -130,7 +128,7 @@
             border-color: var(--google-gray-700);
         }
 
-        .btn-back svg { width: 18px; height: 18px; fill: currentColor; }
+        .btn-back svg { width: 22px; height: 22px; fill: currentColor; }
 
         /* ==========================================
            5. 카드 공통 스타일 (Grid)
@@ -159,7 +157,6 @@
             position: absolute;
             top: 0; left: 0;
             width: 6px; height: 100%;
-            /* var(--subject-color)는 JS에서 인라인으로 동적 주입됨 */
             background: var(--subject-color, var(--google-blue)); 
             opacity: 0;
             transition: opacity 0.2s ease;
@@ -194,7 +191,6 @@
             transform: translateX(4px);
         }
 
-        /* 학년 선택 카드 전용 (약간 다른 아이콘 효과) */
         .grade-card { --subject-color: var(--google-blue); }
 
         /* 반응형 미디어 쿼리 설정 */
@@ -245,17 +241,16 @@
             </div>
         </div>
 
-        <!-- [Step 2] 과목 선택 섹션 (초기에는 숨겨짐) -->
+        <!-- [Step 2] 과목 선택 섹션 -->
         <div id="step-subject" class="step-section">
             <div class="section-header">
-                <button class="btn-back" onclick="goBackToGrades()">
+                <!-- 이전으로 텍스트 제거 및 aria-label로 접근성 유지 -->
+                <button class="btn-back" onclick="goBackToGrades()" aria-label="이전 화면으로 돌아가기">
                     <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
-                    이전으로
                 </button>
                 <h2 id="dynamic-subject-title" class="section-title">2. 학습 과목 선택</h2>
             </div>
             
-            <!-- JavaScript를 통해 이 영역에 동적으로 과목 카드가 렌더링됩니다. -->
             <div id="subject-list" class="card-container"></div>
         </div>
     </main>
@@ -265,44 +260,34 @@
            JavaScript: 데이터 및 화면 전환 로직
         ========================================== */
 
-        // 모든 과목 데이터 정의 (과목별 색상 및 해당 과목이 포함된 학년 배열)
+        // 3학년 데이터에서 사회(soc)와 도덕(mor)을 제외하도록 grades 배열 수정
         const allSubjects = [
             { id: 'kor', name: '국어', desc: '교과서 단원별 핵심 지문 및 빈출 문제', color: '#EA4335', grades: [1, 2, 3] },
             { id: 'eng', name: '영어', desc: '본문 암기 체크 및 핵심 문법·독해 연습', color: '#FBBC04', grades: [1, 2, 3] },
             { id: 'math', name: '수학', desc: '개념 확인 문제부터 수준별 응용·고난도 유형', color: '#4285F4', grades: [1, 2, 3] },
-            { id: 'soc', name: '사회', desc: '주요 개념 요약 및 흐름 파악 실전 평가', color: '#8BC34A', grades: [1, 2, 3] },
+            { id: 'soc', name: '사회', desc: '주요 개념 요약 및 흐름 파악 실전 평가', color: '#8BC34A', grades: [1, 2] },     // 3학년 제외
             { id: 'sci', name: '과학', desc: '실험 탐구 분석 및 대단원별 모의고사', color: '#1A237E', grades: [1, 2, 3] },
             { id: 'his', name: '역사', desc: '시대별 핵심 연표 정리 및 객관식·서술형 대비', color: '#FF9800', grades: [2, 3] },
-            { id: 'mor', name: '도덕', desc: '가치 판단 단원 이론 점검 및 단원별 퀴즈', color: '#03A9F4', grades: [2, 3] },
-            { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] } // 3학년 전용 보라색
+            { id: 'mor', name: '도덕', desc: '가치 판단 단원 이론 점검 및 단원별 퀴즈', color: '#03A9F4', grades: [2] },        // 3학년 제외
+            { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] }
         ];
 
-        // 1. 학년 선택 시 실행되는 함수
         function selectGrade(grade) {
-            // 화면 전환 처리
             document.getElementById('step-grade').classList.remove('active');
             
-            // 약간의 딜레이를 주어 애니메이션이 자연스럽게 적용되게 함
             setTimeout(() => {
                 document.getElementById('step-subject').classList.add('active');
-                
-                // 타이틀 변경
                 document.getElementById('dynamic-subject-title').innerText = `2. ${grade}학년 학습 과목 선택`;
-                
-                // 선택한 학년에 맞는 과목 카드 렌더링
                 renderSubjects(grade);
             }, 50);
         }
 
-        // 2. 해당 학년의 과목들을 필터링하여 화면에 그리는 함수
         function renderSubjects(grade) {
             const subjectListContainer = document.getElementById('subject-list');
-            subjectListContainer.innerHTML = ''; // 기존 목록 초기화
+            subjectListContainer.innerHTML = '';
 
-            // 전체 과목 중 선택한 학년(grade)이 포함된 과목만 필터링
             const filteredSubjects = allSubjects.filter(sub => sub.grades.includes(grade));
 
-            // 필터링된 과목들을 HTML 카드로 생성하여 컨테이너에 추가
             filteredSubjects.forEach(sub => {
                 const cardHTML = `
                     <div class="custom-card" style="--subject-color: ${sub.color};" onclick="goToQuiz('${sub.id}')">
@@ -317,7 +302,6 @@
             });
         }
 
-        // 3. 뒤로 가기 버튼 실행 시 (학년 선택 화면으로 복귀)
         function goBackToGrades() {
             document.getElementById('step-subject').classList.remove('active');
             
@@ -326,9 +310,7 @@
             }, 50);
         }
 
-        // 4. 과목 클릭 시 실행할 함수 (나중에 문제 풀이 페이지로 연결할 때 사용)
         function goToQuiz(subjectId) {
-            // 임시로 알림창 띄우기 (실제 개발 시에는 window.location.href = '...'; 등으로 페이지 이동)
             alert(subjectId + " 문제 페이지로 이동합니다! (기능 개발 중)");
         }
     </script>
