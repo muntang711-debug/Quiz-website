@@ -5,64 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>용곡중 시험대비 문제모음</title>
     <style>
-        /* Pretendard 폰트 정의 */
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
-            font-weight: 100;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
-            font-weight: 200;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
-            font-weight: 300;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
-            font-weight: 400;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
-            font-weight: 500;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
-            font-weight: 600;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
-            font-weight: 800;
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Pretendard';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
-            font-weight: 900;
-            font-display: swap;
-        }
+        /* ==========================================
+           1. 폰트 설정 (Pretendard)
+        ========================================== */
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2'); font-weight: 100; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2'); font-weight: 200; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+        @font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
 
-        /* Google & Gemini 디자인 시스템 정의 */
+        /* ==========================================
+           2. Google & Gemini 디자인 시스템 변수
+        ========================================== */
         :root {
+            --google-blue: #1a73e8;
             --google-gray-100: #f8f9fa;
             --google-gray-200: #e8eaed;
             --google-gray-700: #3c4043;
@@ -73,23 +33,20 @@
             --gemini-gradient: linear-gradient(90deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
         }
 
-        /* 기본 여백 초기화 및 박스 모델 설정 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* 폰트를 Pretendard로 변경 */
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-container);
             color: var(--text-primary);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            overflow-y: scroll; /* 스크롤바 이동 방지 */
         }
 
-        /* 상단 헤더 영역 */
+        /* ==========================================
+           3. 공통 레이아웃 & 헤더
+        ========================================== */
         header {
             background-color: var(--bg-surface);
             padding: 3rem 1.5rem;
@@ -97,10 +54,7 @@
             border-bottom: 1px solid var(--google-gray-200);
         }
 
-        .header-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .header-container { max-width: 800px; margin: 0 auto; }
 
         header h1 {
             font-size: 2.4rem;
@@ -114,45 +68,80 @@
             display: inline-block;
         }
 
-        header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
+        header p { color: var(--text-secondary); font-size: 1.1rem; font-weight: 500; }
 
-        /* 메인 콘텐츠 영역 */
         main {
             padding: 3rem 1.5rem;
             max-width: 1080px;
             margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        /* ==========================================
+           4. 단계별 섹션 전환 애니메이션
+        ========================================== */
+        .step-section {
+            display: none;
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .step-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 2rem;
-            padding-left: 0.25rem;
         }
 
-        /* 과목 카드 레이아웃 (Grid) */
-        .subject-container {
+        /* 뒤로 가기 버튼 (Google 스타일 칩) */
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--google-gray-200);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background: var(--google-gray-100);
+            color: var(--text-primary);
+            border-color: var(--google-gray-700);
+        }
+
+        .btn-back svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* ==========================================
+           5. 카드 공통 스타일 (Grid)
+        ========================================== */
+        .card-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
 
-        /* 과목별 CSS 변수(포인트 색상) 설정 */
-        .subject-card:nth-child(1) { --subject-color: #EA4335; } /* 국어 - 빨강 */
-        .subject-card:nth-child(2) { --subject-color: #FBBC04; } /* 영어 - 노랑 */
-        .subject-card:nth-child(3) { --subject-color: #4285F4; } /* 수학 - 파랑 */
-        .subject-card:nth-child(4) { --subject-color: #8BC34A; } /* 사회 - 연두 */
-        .subject-card:nth-child(5) { --subject-color: #1A237E; } /* 과학 - 남색 */
-        .subject-card:nth-child(6) { --subject-color: #FF9800; } /* 역사 - 주황 */
-        .subject-card:nth-child(7) { --subject-color: #03A9F4; } /* 도덕 - 하늘색 */
-
-        /* Gemini 스타일 라운딩 처리 카드 디자인 */
-        .subject-card {
+        .custom-card {
             background: var(--bg-surface);
             padding: 2rem;
             border-radius: 24px;
@@ -165,75 +154,52 @@
             overflow: hidden;
         }
 
-        /* 마우스 호버 시 왼쪽에서 나타나는 컬러 포인트 바 (각 과목 색상 적용) */
-        .subject-card::before {
+        .custom-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            background: var(--subject-color);
+            top: 0; left: 0;
+            width: 6px; height: 100%;
+            /* var(--subject-color)는 JS에서 인라인으로 동적 주입됨 */
+            background: var(--subject-color, var(--google-blue)); 
             opacity: 0;
             transition: opacity 0.2s ease;
         }
 
-        /* 카드 마우스 호버 효과 */
-        .subject-card:hover {
+        .custom-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 4px 12px 0 rgba(60,64,67,0.15), 0 8px 24px 3px rgba(60,64,67,0.1);
             border-color: var(--google-gray-200);
         }
 
-        .subject-card:hover::before {
-            opacity: 1;
-        }
+        .custom-card:hover::before { opacity: 1; }
 
-        .subject-title-wrapper {
+        .card-title-wrapper {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 0.5rem;
         }
 
-        .subject-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+        .card-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .card-desc { font-size: 0.95rem; color: var(--text-secondary); font-weight: 400; }
 
-        .subject-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-        }
-
-        /* 화살표 아이콘 */
         .arrow-icon {
-            width: 24px;
-            height: 24px;
+            width: 24px; height: 24px;
             fill: var(--text-secondary);
             transition: fill 0.2s, transform 0.2s;
         }
 
-        /* 마우스 호버 시 화살표 색상이 과목별 색상으로 변함 */
-        .subject-card:hover .arrow-icon {
-            fill: var(--subject-color);
+        .custom-card:hover .arrow-icon {
+            fill: var(--subject-color, var(--google-blue));
             transform: translateX(4px);
         }
 
-        /* 반응형 미디어 쿼리 설정 */
-        @media (min-width: 600px) {
-            .subject-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        /* 학년 선택 카드 전용 (약간 다른 아이콘 효과) */
+        .grade-card { --subject-color: var(--google-blue); }
 
-        @media (min-width: 960px) {
-            .subject-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+        /* 반응형 미디어 쿼리 설정 */
+        @media (min-width: 600px) { .card-container { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 960px) { .card-container { grid-template-columns: repeat(3, 1fr); } }
     </style>
 </head>
 <body>
@@ -246,73 +212,125 @@
     </header>
     
     <main>
-        <h2 class="section-title">학습 과목 선택</h2>
-        
-        <div class="subject-container">
-            <!-- 1. 국어 (빨강) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">국어</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">교과서 단원별 핵심 지문 및 빈출 문제</p>
+        <!-- [Step 1] 학년 선택 섹션 -->
+        <div id="step-grade" class="step-section active">
+            <div class="section-header">
+                <h2 class="section-title">1. 학년을 선택하세요</h2>
             </div>
+            
+            <div class="card-container">
+                <div class="custom-card grade-card" onclick="selectGrade(1)">
+                    <div class="card-title-wrapper">
+                        <span class="card-title">1학년</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">중학교 첫 내신, 기초 탄탄 대비</p>
+                </div>
+                
+                <div class="custom-card grade-card" onclick="selectGrade(2)">
+                    <div class="card-title-wrapper">
+                        <span class="card-title">2학년</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">본격적인 심화 학습 및 성적 향상</p>
+                </div>
+                
+                <div class="custom-card grade-card" onclick="selectGrade(3)">
+                    <div class="card-title-wrapper">
+                        <span class="card-title">3학년</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">고입 대비 및 완벽한 중학 과정 마무리</p>
+                </div>
+            </div>
+        </div>
 
-            <!-- 2. 영어 (노랑) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">영어</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">본문 암기 체크 및 핵심 문법·독해 연습</p>
+        <!-- [Step 2] 과목 선택 섹션 (초기에는 숨겨짐) -->
+        <div id="step-subject" class="step-section">
+            <div class="section-header">
+                <button class="btn-back" onclick="goBackToGrades()">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                    이전으로
+                </button>
+                <h2 id="dynamic-subject-title" class="section-title">2. 학습 과목 선택</h2>
             </div>
-
-            <!-- 3. 수학 (파랑) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">수학</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">개념 확인 문제부터 수준별 응용·고난도 유형</p>
-            </div>
-
-            <!-- 4. 사회 (연두) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">사회</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">주요 개념 요약 및 흐름 파악 실전 평가</p>
-            </div>
-
-            <!-- 5. 과학 (남색) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">과학</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">실험 탐구 분석 및 대단원별 모의고사</p>
-            </div>
-
-            <!-- 6. 역사 (주황) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">역사</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">시대별 핵심 연표 정리 및 객관식·서술형 대비</p>
-            </div>
-
-            <!-- 7. 도덕 (하늘색) -->
-            <div class="subject-card">
-                <div class="subject-title-wrapper">
-                    <span class="subject-title">도덕</span>
-                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
-                </div>
-                <p class="subject-desc">가치 판단 단원 이론 점검 및 단원별 퀴즈</p>
-            </div>
+            
+            <!-- JavaScript를 통해 이 영역에 동적으로 과목 카드가 렌더링됩니다. -->
+            <div id="subject-list" class="card-container"></div>
         </div>
     </main>
 
+    <script>
+        /* ==========================================
+           JavaScript: 데이터 및 화면 전환 로직
+        ========================================== */
+
+        // 모든 과목 데이터 정의 (과목별 색상 및 해당 과목이 포함된 학년 배열)
+        const allSubjects = [
+            { id: 'kor', name: '국어', desc: '교과서 단원별 핵심 지문 및 빈출 문제', color: '#EA4335', grades: [1, 2, 3] },
+            { id: 'eng', name: '영어', desc: '본문 암기 체크 및 핵심 문법·독해 연습', color: '#FBBC04', grades: [1, 2, 3] },
+            { id: 'math', name: '수학', desc: '개념 확인 문제부터 수준별 응용·고난도 유형', color: '#4285F4', grades: [1, 2, 3] },
+            { id: 'soc', name: '사회', desc: '주요 개념 요약 및 흐름 파악 실전 평가', color: '#8BC34A', grades: [1, 2, 3] },
+            { id: 'sci', name: '과학', desc: '실험 탐구 분석 및 대단원별 모의고사', color: '#1A237E', grades: [1, 2, 3] },
+            { id: 'his', name: '역사', desc: '시대별 핵심 연표 정리 및 객관식·서술형 대비', color: '#FF9800', grades: [2, 3] },
+            { id: 'mor', name: '도덕', desc: '가치 판단 단원 이론 점검 및 단원별 퀴즈', color: '#03A9F4', grades: [2, 3] },
+            { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] } // 3학년 전용 보라색
+        ];
+
+        // 1. 학년 선택 시 실행되는 함수
+        function selectGrade(grade) {
+            // 화면 전환 처리
+            document.getElementById('step-grade').classList.remove('active');
+            
+            // 약간의 딜레이를 주어 애니메이션이 자연스럽게 적용되게 함
+            setTimeout(() => {
+                document.getElementById('step-subject').classList.add('active');
+                
+                // 타이틀 변경
+                document.getElementById('dynamic-subject-title').innerText = `2. ${grade}학년 학습 과목 선택`;
+                
+                // 선택한 학년에 맞는 과목 카드 렌더링
+                renderSubjects(grade);
+            }, 50);
+        }
+
+        // 2. 해당 학년의 과목들을 필터링하여 화면에 그리는 함수
+        function renderSubjects(grade) {
+            const subjectListContainer = document.getElementById('subject-list');
+            subjectListContainer.innerHTML = ''; // 기존 목록 초기화
+
+            // 전체 과목 중 선택한 학년(grade)이 포함된 과목만 필터링
+            const filteredSubjects = allSubjects.filter(sub => sub.grades.includes(grade));
+
+            // 필터링된 과목들을 HTML 카드로 생성하여 컨테이너에 추가
+            filteredSubjects.forEach(sub => {
+                const cardHTML = `
+                    <div class="custom-card" style="--subject-color: ${sub.color};" onclick="goToQuiz('${sub.id}')">
+                        <div class="card-title-wrapper">
+                            <span class="card-title">${sub.name}</span>
+                            <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                        </div>
+                        <p class="card-desc">${sub.desc}</p>
+                    </div>
+                `;
+                subjectListContainer.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+
+        // 3. 뒤로 가기 버튼 실행 시 (학년 선택 화면으로 복귀)
+        function goBackToGrades() {
+            document.getElementById('step-subject').classList.remove('active');
+            
+            setTimeout(() => {
+                document.getElementById('step-grade').classList.add('active');
+            }, 50);
+        }
+
+        // 4. 과목 클릭 시 실행할 함수 (나중에 문제 풀이 페이지로 연결할 때 사용)
+        function goToQuiz(subjectId) {
+            // 임시로 알림창 띄우기 (실제 개발 시에는 window.location.href = '...'; 등으로 페이지 이동)
+            alert(subjectId + " 문제 페이지로 이동합니다! (기능 개발 중)");
+        }
+    </script>
 </body>
 </html>
