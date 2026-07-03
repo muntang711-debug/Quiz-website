@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- 모바일 반응형을 위한 필수 태그 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과목별 문제 풀이 사이트</title>
+    <style>
+        /* 기본 여백 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .subject-container {
+            display: grid;
+            /* 기본 모바일 화면: 1열 배치 */
+            grid-template-columns: 1fr; 
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 태블릿 화면 (600px 이상): 2열 배치 */
+        @media (min-width: 600px) {
+            .subject-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* PC 화면 (900px 이상): 3열 배치 */
+        @media (min-width: 900px) {
+            .subject-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📝 문제 풀이 마스터</h1>
+    </header>
+    
+    <main>
+        <h2>과목을 선택하세요</h2>
+        
+        <div class="subject-container">
+            <div class="subject-card">국어</div>
+            <div class="subject-card">영어</div>
+            <div class="subject-card">수학</div>
+            <div class="subject-card">한국사</div>
+            <div class="subject-card">과학탐구</div>
+            <div class="subject-card">사회탐구</div>
+        </div>
+    </main>
+</body>
+</html>
