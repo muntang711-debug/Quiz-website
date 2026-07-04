@@ -265,14 +265,17 @@
             { id: 'kor', name: '국어', desc: '교과서 단원별 핵심 지문 및 빈출 문제', color: '#EA4335', grades: [1, 2, 3] },
             { id: 'eng', name: '영어', desc: '본문 암기 체크 및 핵심 문법·독해 연습', color: '#FBBC04', grades: [1, 2, 3] },
             { id: 'math', name: '수학', desc: '개념 확인 문제부터 수준별 응용·고난도 유형', color: '#4285F4', grades: [1, 2, 3] },
-            { id: 'soc', name: '사회', desc: '주요 개념 요약 및 흐름 파악 실전 평가', color: '#8BC34A', grades: [1, 2] },     // 3학년 제외
+            { id: 'soc', name: '사회', desc: '주요 개념 요약 및 흐름 파악 실전 평가', color: '#8BC34A', grades: [1, 2] },
             { id: 'sci', name: '과학', desc: '실험 탐구 분석 및 대단원별 모의고사', color: '#1A237E', grades: [1, 2, 3] },
             { id: 'his', name: '역사', desc: '시대별 핵심 연표 정리 및 객관식·서술형 대비', color: '#FF9800', grades: [2, 3] },
-            { id: 'mor', name: '도덕', desc: '가치 판단 단원 이론 점검 및 단원별 퀴즈', color: '#03A9F4', grades: [2] },        // 3학년 제외
+            { id: 'mor', name: '도덕', desc: '가치 판단 단원 이론 점검 및 단원별 퀴즈', color: '#03A9F4', grades: [2] },
             { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] }
         ];
 
         function selectGrade(grade) {
+            // URL 주소창 변경 로직 추가 (예: ygmq.site/1)
+            history.pushState({ step: 'subject', grade: grade }, '', '/' + grade);
+
             document.getElementById('step-grade').classList.remove('active');
             
             setTimeout(() => {
@@ -303,6 +306,9 @@
         }
 
         function goBackToGrades() {
+            // 뒤로가기 시 기본 도메인 주소로 원상 복구 (예: ygmq.site/)
+            history.pushState({ step: 'grade' }, '', '/');
+
             document.getElementById('step-subject').classList.remove('active');
             
             setTimeout(() => {
@@ -313,6 +319,18 @@
         function goToQuiz(subjectId) {
             alert("이 과목은 현재 개발중입니다.");
         }
+
+        // 브라우저의 뒤로가기/앞으로가기 버튼을 눌렀을 때 화면이 동기화되도록 처리
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.step === 'subject') {
+                document.getElementById('step-grade').classList.remove('active');
+                document.getElementById('step-subject').classList.add('active');
+                renderSubjects(event.state.grade);
+            } else {
+                document.getElementById('step-subject').classList.remove('active');
+                document.getElementById('step-grade').classList.add('active');
+            }
+        });
     </script>
 </body>
 </html>
