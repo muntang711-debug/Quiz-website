@@ -41,7 +41,7 @@
             color: var(--text-primary);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
-            overflow-y: scroll; /* 스크롤바 이동 방지 */
+            overflow-y: scroll; 
         }
 
         /* ==========================================
@@ -107,7 +107,6 @@
             color: var(--text-primary);
         }
 
-        /* 뒤로 가기 버튼 (아이콘 전용 둥근 버튼으로 수정) */
         .btn-back {
             background: transparent;
             border: 1px solid var(--google-gray-200);
@@ -193,7 +192,6 @@
 
         .grade-card { --subject-color: var(--google-blue); }
 
-        /* 반응형 미디어 쿼리 설정 */
         @media (min-width: 600px) { .card-container { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 960px) { .card-container { grid-template-columns: repeat(3, 1fr); } }
     </style>
@@ -244,7 +242,6 @@
         <!-- [Step 2] 과목 선택 섹션 -->
         <div id="step-subject" class="step-section">
             <div class="section-header">
-                <!-- 이전으로 텍스트 제거 및 aria-label로 접근성 유지 -->
                 <button class="btn-back" onclick="goBackToGrades()" aria-label="이전 화면으로 돌아가기">
                     <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
                 </button>
@@ -253,14 +250,85 @@
             
             <div id="subject-list" class="card-container"></div>
         </div>
+
+        <!-- [Step 3] 학기 선택 섹션 -->
+        <div id="step-semester" class="step-section">
+            <div class="section-header">
+                <button class="btn-back" onclick="goBackToSubjects()" aria-label="이전 화면으로 돌아가기">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                </button>
+                <h2 id="dynamic-semester-title" class="section-title">3. 학기 선택</h2>
+            </div>
+            
+            <div class="card-container">
+                <div class="custom-card" style="--subject-color: var(--google-blue);" onclick="selectSemester(1)">
+                    <div class="card-title-wrapper">
+                        <span class="card-title">1학기</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">1학기 과정 학습하기</p>
+                </div>
+                <div class="custom-card" style="--subject-color: var(--google-blue);" onclick="selectSemester(2)">
+                    <div class="card-title-wrapper">
+                        <span class="card-title">2학기</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">2학기 과정 학습하기</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- [Step 4] 학습 단계 선택 섹션 -->
+        <div id="step-study" class="step-section">
+            <div class="section-header">
+                <button class="btn-back" onclick="goBackToSemesters()" aria-label="이전 화면으로 돌아가기">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                </button>
+                <h2 class="section-title">4. 학습 단계 선택</h2>
+            </div>
+            
+            <div class="card-container">
+                <div class="custom-card" style="--subject-color: #EA4335;"> <!-- 구글 레드 -->
+                    <div class="card-title-wrapper">
+                        <span class="card-title">1. 개념 알기</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">내용 준비 중입니다.</p>
+                </div>
+                <div class="custom-card" style="--subject-color: #FBBC04;"> <!-- 구글 옐로우 -->
+                    <div class="card-title-wrapper">
+                        <span class="card-title">2. 학습 활동</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">내용 준비 중입니다.</p>
+                </div>
+                <div class="custom-card" style="--subject-color: #34A853;"> <!-- 구글 그린 -->
+                    <div class="card-title-wrapper">
+                        <span class="card-title">3. 단원 마무리</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">내용 준비 중입니다.</p>
+                </div>
+                <div class="custom-card" style="--subject-color: #4285F4;"> <!-- 구글 블루 -->
+                    <div class="card-title-wrapper">
+                        <span class="card-title">4. 문제 풀이</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                    </div>
+                    <p class="card-desc">내용 준비 중입니다.</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
         /* ==========================================
            JavaScript: 데이터 및 화면 전환 로직
         ========================================== */
+        
+        let currentGrade = null;
+        let currentSubject = null;
+        let currentSemester = null;
 
-        // 3학년 데이터에서 사회(soc)와 도덕(mor)을 제외하도록 grades 배열 수정
         const allSubjects = [
             { id: 'kor', name: '국어', desc: '교과서 단원별 핵심 지문 및 빈출 문제', color: '#EA4335', grades: [1, 2, 3] },
             { id: 'eng', name: '영어', desc: '본문 암기 체크 및 핵심 문법·독해 연습', color: '#FBBC04', grades: [1, 2, 3] },
@@ -272,15 +340,16 @@
             { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] }
         ];
 
+        // 1. 학년 선택 -> 과목 선택 뷰로 이동
         function selectGrade(grade) {
-            // URL 주소창 변경 로직 추가 (예: ygmq.site/1)
+            currentGrade = grade;
             history.pushState({ step: 'subject', grade: grade }, '', '/' + grade);
 
-            document.getElementById('step-grade').classList.remove('active');
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
             
             setTimeout(() => {
                 document.getElementById('step-subject').classList.add('active');
-                document.getElementById('dynamic-subject-title').innerText = `2. 학습 과목 선택`;
+                document.getElementById('dynamic-subject-title').innerText = `2. ${grade}학년 학습 과목 선택`;
                 renderSubjects(grade);
             }, 50);
         }
@@ -305,29 +374,86 @@
             });
         }
 
-        function goBackToGrades() {
-            // 뒤로가기 시 기본 도메인 주소로 원상 복구 (예: ygmq.site/)
-            history.pushState({ step: 'grade' }, '', '/');
-
-            document.getElementById('step-subject').classList.remove('active');
+        // 2. 과목 선택 -> 학기 선택 뷰로 이동 (2학년 국어만 우선 오픈)
+        function goToQuiz(subjectId) {
+            currentSubject = subjectId;
+            // 국어인 경우 url에 'korean'을 사용, 나머지는 id 그대로 사용
+            const urlSubject = subjectId === 'kor' ? 'korean' : subjectId; 
             
+            if (currentGrade === 2 && subjectId === 'kor') {
+                history.pushState({ step: 'semester', grade: currentGrade, subject: subjectId }, '', '/' + currentGrade + '/' + urlSubject);
+
+                document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+                setTimeout(() => {
+                    document.getElementById('step-semester').classList.add('active');
+                }, 50);
+            } else {
+                alert("이 과목은 현재 개발중입니다.");
+            }
+        }
+
+        // 3. 학기 선택 -> 학습 단계 선택 뷰로 이동
+        function selectSemester(semester) {
+            currentSemester = semester;
+            const urlSubject = currentSubject === 'kor' ? 'korean' : currentSubject; 
+            
+            history.pushState({ step: 'study', grade: currentGrade, subject: currentSubject, semester: semester }, '', '/' + currentGrade + '/' + urlSubject + '/' + semester);
+
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('step-study').classList.add('active');
+            }, 50);
+        }
+
+        // ---------------------------------------------------
+        // 네비게이션 (뒤로가기) 로직
+        // ---------------------------------------------------
+        function goBackToGrades() {
+            history.pushState({ step: 'grade' }, '', '/');
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
             setTimeout(() => {
                 document.getElementById('step-grade').classList.add('active');
             }, 50);
         }
 
-        function goToQuiz(subjectId) {
-            alert("이 과목은 현재 개발중입니다.");
+        function goBackToSubjects() {
+            history.pushState({ step: 'subject', grade: currentGrade }, '', '/' + currentGrade);
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('step-subject').classList.add('active');
+                renderSubjects(currentGrade);
+            }, 50);
         }
 
-        // 브라우저의 뒤로가기/앞으로가기 버튼을 눌렀을 때 화면이 동기화되도록 처리
+        function goBackToSemesters() {
+            const urlSubject = currentSubject === 'kor' ? 'korean' : currentSubject; 
+            history.pushState({ step: 'semester', grade: currentGrade, subject: currentSubject }, '', '/' + currentGrade + '/' + urlSubject);
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+            setTimeout(() => {
+                document.getElementById('step-semester').classList.add('active');
+            }, 50);
+        }
+
+        // 브라우저 뒤로가기/앞으로가기 버튼 감지 로직
         window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.step === 'subject') {
-                document.getElementById('step-grade').classList.remove('active');
-                document.getElementById('step-subject').classList.add('active');
-                renderSubjects(event.state.grade);
+            document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
+
+            if (event.state) {
+                currentGrade = event.state.grade || null;
+                currentSubject = event.state.subject || null;
+                currentSemester = event.state.semester || null;
+
+                if (event.state.step === 'study') {
+                    document.getElementById('step-study').classList.add('active');
+                } else if (event.state.step === 'semester') {
+                    document.getElementById('step-semester').classList.add('active');
+                } else if (event.state.step === 'subject') {
+                    document.getElementById('step-subject').classList.add('active');
+                    renderSubjects(currentGrade);
+                } else {
+                    document.getElementById('step-grade').classList.add('active');
+                }
             } else {
-                document.getElementById('step-subject').classList.remove('active');
                 document.getElementById('step-grade').classList.add('active');
             }
         });
