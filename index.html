@@ -211,7 +211,7 @@
         <!-- [Step 1] 학년 선택 섹션 -->
         <div id="step-grade" class="step-section active">
             <div class="section-header">
-                <h2 class="section-title">1. 학년을 선택하세요</h2>
+                <h2 class="section-title">1. 학년 선택</h2>
             </div>
             
             <div class="card-container">
@@ -220,7 +220,7 @@
                         <span class="card-title">1학년</span>
                         <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                     </div>
-                    <p class="card-desc">중학교 첫 내신, 기초 탄탄 대비</p>
+                    <p class="card-desc">국어, 영어, 수학, 사회, 과학 지원</p>
                 </div>
                 
                 <div class="custom-card grade-card" onclick="selectGrade(2)">
@@ -228,7 +228,7 @@
                         <span class="card-title">2학년</span>
                         <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                     </div>
-                    <p class="card-desc">본격적인 심화 학습 및 성적 향상</p>
+                    <p class="card-desc">국어, 영어, 수학, 사회, 과학, 역사, 도덕 지원</p>
                 </div>
                 
                 <div class="custom-card grade-card" onclick="selectGrade(3)">
@@ -236,7 +236,7 @@
                         <span class="card-title">3학년</span>
                         <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
                     </div>
-                    <p class="card-desc">고입 대비 및 완벽한 중학 과정 마무리</p>
+                    <p class="card-desc">국어, 영어, 수학, 과학, 역사, 한문 지원</p>
                 </div>
             </div>
         </div>
@@ -277,7 +277,7 @@
             
             setTimeout(() => {
                 document.getElementById('step-subject').classList.add('active');
-                document.getElementById('dynamic-subject-title').innerText = `2. ${grade}학년 학습 과목 선택`;
+                document.getElementById('dynamic-subject-title').innerText = `2. 학습 과목 선택`;
                 renderSubjects(grade);
             }, 50);
         }
@@ -311,7 +311,7 @@
         }
 
         function goToQuiz(subjectId) {
-            alert(subjectId + " 문제 페이지로 이동합니다! (기능 개발 중)");
+            alert("이 과목은 현재 개발중입니다.");
         }
     </script>
 </body>
