@@ -222,14 +222,13 @@
         }
 
         @media (min-width: 600px) { .card-container { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 960px) { .card-container { grid-template-columns: repeat(4, 1fr); } } /* 카드가 4개씩이므로 큰화면 4열 배치 */
+        @media (min-width: 960px) { .card-container { grid-template-columns: repeat(4, 1fr); } } /* 큰화면 4열 배치 */
     </style>
 </head>
 <body>
 
     <header>
         <div class="header-container">
-            <!-- 타이틀 클릭 시 처음 화면으로 돌아가게 설정 -->
             <h1 onclick="goBackToHome()">중학 공부는 역시 YGMQ와 함께!</h1>
             <p>YGMQ로 공부해서 성적을 높여보세요!</p>
         </div>
@@ -308,13 +307,27 @@
             </div>
         </div>
 
-        <!-- [Step 4] 학습 단계 선택 섹션 -->
-        <div id="step-study" class="step-section">
+        <!-- [Step 3.5] 단원 선택 섹션 (새로 추가됨) -->
+        <div id="step-chapter" class="step-section">
             <div class="section-header">
                 <button class="btn-back" onclick="goBackToSemesters()" aria-label="이전 화면으로 돌아가기">
                     <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
                 </button>
-                <h2 class="section-title">4. 학습 단계 선택</h2>
+                <h2 id="dynamic-chapter-title" class="section-title">단원 선택</h2>
+            </div>
+            
+            <!-- 자바스크립트로 대단원/소단원이 여기에 렌더링 됩니다 -->
+            <div id="chapter-list"></div>
+        </div>
+
+        <!-- [Step 4] 학습 단계 선택 섹션 -->
+        <div id="step-study" class="step-section">
+            <div class="section-header">
+                <!-- 이전으로 돌아가기 (단원 선택 화면으로) -->
+                <button class="btn-back" onclick="goBackToChapters()" aria-label="이전 화면으로 돌아가기">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
+                </button>
+                <h2 id="dynamic-study-title" class="section-title">4. 학습 단계 선택</h2>
             </div>
             
             <!-- 1. 개념 알기 -->
@@ -362,6 +375,7 @@
         let currentGrade = null;
         let currentSubject = null;
         let currentSemester = null;
+        let currentChapter = null; // 소단원 ID 저장
 
         const allSubjects = [
             { id: 'kor', name: '국어', desc: '교과서 단원별 핵심 지문 및 빈출 문제', color: '#EA4335', grades: [1, 2, 3] },
@@ -374,6 +388,70 @@
             { id: 'han', name: '한문', desc: '필수 한자어 및 기초 한문 독해 연습', color: '#9C27B0', grades: [3] }
         ];
 
+        // 2학년 국어 단원 데이터
+        const grade2KoreanData = {
+            1: [ // 1학기
+                {
+                    title: "1. 문학을 펼치면",
+                    subs: [
+                        { id: "1-1", title: "(1) 시의 목소리" },
+                        { id: "1-2", title: "(2) 이야기 속 시선" }
+                    ]
+                },
+                {
+                    title: "2. 소통으로 여는 세상",
+                    subs: [
+                        { id: "2-1", title: "(1) 공감하고 존중하며 대화하기" },
+                        { id: "2-2", title: "(2) 피동 표현과 인용 표현 활용하기" }
+                    ]
+                },
+                {
+                    title: "3. 나와 세상의 연결 고리",
+                    subs: [
+                        { id: "3-1", title: "(1) 점검·조정하며 글 읽기" },
+                        { id: "3-2", title: "(2) 설명하는 글 쓰기" }
+                    ]
+                },
+                {
+                    title: "4. 표현의 빛깔",
+                    subs: [
+                        { id: "4-1", title: "(1) 개성적인 발상과 표현" },
+                        { id: "4-2", title: "(2) 영상 매체 자료 만들기" }
+                    ]
+                }
+            ],
+            2: [ // 2학기
+                {
+                    title: "1. 세상과 만나는 시간",
+                    subs: [
+                        { id: "1-1", title: "(1) 문학, 시대의 거울" },
+                        { id: "1-2", title: "(2) 이해하기 쉽게 발표하기" }
+                    ]
+                },
+                {
+                    title: "2. 분석의 즐거움",
+                    subs: [
+                        { id: "2-1", title: "(1) 설명과 논증이 담긴 글 읽기" },
+                        { id: "2-2", title: "(2) 광고와 홍보물 분석하기" }
+                    ]
+                },
+                {
+                    title: "3. 탐구하고 성찰하는 언어생활",
+                    subs: [
+                        { id: "3-1", title: "(1) 국어의 음운과 문자" },
+                        { id: "3-2", title: "(2) 듣기·말하기 성찰하기" }
+                    ]
+                },
+                {
+                    title: "4. 다채로운 글의 세계",
+                    subs: [
+                        { id: "4-1", title: "(1) 복합양식 평가하며 읽기" },
+                        { id: "4-2", title: "(2) 복합양식 활용하여 글쓰기" }
+                    ]
+                }
+            ]
+        };
+
         // --- 화면 전환 헬퍼 함수 ---
         function switchSection(sectionId) {
             document.querySelectorAll('.step-section').forEach(el => el.classList.remove('active'));
@@ -382,7 +460,7 @@
             }, 50);
         }
 
-        // --- 각 단계 선택 로직 (push 매개변수로 URL 갱신 여부 결정) ---
+        // --- 1. 학년 선택 ---
         function selectGrade(grade, push = false) {
             currentGrade = parseInt(grade);
             if (push) history.pushState({ step: 'subject', grade: currentGrade }, '', '/' + currentGrade);
@@ -411,23 +489,75 @@
             });
         }
 
+        // --- 2. 과목 선택 ---
         function goToQuiz(subjectId, push = false) {
             currentSubject = subjectId;
             const urlSubject = subjectId === 'kor' ? 'korean' : subjectId; 
             
             if (currentGrade === 2 && subjectId === 'kor') {
                 if (push) history.pushState({ step: 'semester', grade: currentGrade, subject: subjectId }, '', '/' + currentGrade + '/' + urlSubject);
+                document.getElementById('dynamic-semester-title').innerText = `3. 학기 선택`;
                 switchSection('step-semester');
             } else {
                 alert("이 과목은 현재 개발중입니다.");
             }
         }
 
+        // --- 3. 학기 선택 -> 단원 렌더링 ---
         function selectSemester(semester, push = false) {
             currentSemester = parseInt(semester);
             const urlSubject = currentSubject === 'kor' ? 'korean' : currentSubject; 
             
-            if (push) history.pushState({ step: 'study', grade: currentGrade, subject: currentSubject, semester: currentSemester }, '', '/' + currentGrade + '/' + urlSubject + '/' + currentSemester);
+            if (push) history.pushState({ step: 'chapter', grade: currentGrade, subject: currentSubject, semester: currentSemester }, '', '/' + currentGrade + '/' + urlSubject + '/' + currentSemester);
+            
+            document.getElementById('dynamic-chapter-title').innerText = `${currentGrade}학년 ${currentSemester}학기 단원 선택`;
+            renderChapters(currentSemester);
+            switchSection('step-chapter');
+        }
+
+        // 단원 목록 동적 생성 함수 (파란색 통일)
+        function renderChapters(semester) {
+            const chapterList = document.getElementById('chapter-list');
+            chapterList.innerHTML = '';
+
+            const data = grade2KoreanData[semester];
+            if (!data) return;
+
+            let html = '';
+            data.forEach((chap) => {
+                html += `<h3 class="sub-section-title" style="--subject-color: var(--google-blue);">${chap.title}</h3>`;
+                html += `<div class="card-container mb-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">`;
+                
+                chap.subs.forEach((sub) => {
+                    // onclick 시 학기 정보, 소단원 ID, 소단원 제목을 같이 넘겨줍니다.
+                    html += `
+                        <div class="custom-card" style="--subject-color: var(--google-blue);" onclick="selectStudyStep('${semester}', '${sub.id}', '${sub.title}', true)">
+                            <div class="card-title-wrapper">
+                                <span class="card-title" style="font-size:1.1rem;">${sub.title}</span>
+                                <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            });
+            chapterList.innerHTML = html;
+        }
+
+        // --- 4. 소단원 선택 -> 학습 단계 뷰로 이동 (2학기는 차단) ---
+        function selectStudyStep(semester, chapterId, chapterTitle, push = false) {
+            if (parseInt(semester) === 2) {
+                alert('2학기 내용은 현재 준비 중입니다.');
+                return;
+            }
+
+            currentChapter = chapterId;
+            const urlSubject = currentSubject === 'kor' ? 'korean' : currentSubject; 
+            
+            // URL에 소단원 경로 추가 (예: /2/korean/1/1-1)
+            if (push) history.pushState({ step: 'study', grade: currentGrade, subject: currentSubject, semester: currentSemester, chapter: currentChapter }, '', '/' + currentGrade + '/' + urlSubject + '/' + currentSemester + '/' + currentChapter);
+            
+            document.getElementById('dynamic-study-title').innerText = `${chapterTitle} - 학습 단계 선택`;
             switchSection('step-study');
         }
 
@@ -437,6 +567,7 @@
             currentGrade = null;
             currentSubject = null;
             currentSemester = null;
+            currentChapter = null;
             switchSection('step-grade');
         }
 
@@ -454,25 +585,28 @@
             switchSection('step-semester');
         }
 
-        // --- 핵심: 페이지 첫 로드 시 현재 URL 읽어서 화면 띄우기 (Client-side Routing) ---
+        function goBackToChapters() {
+            const urlSubject = currentSubject === 'kor' ? 'korean' : currentSubject; 
+            history.pushState({ step: 'chapter', grade: currentGrade, subject: currentSubject, semester: currentSemester }, '', '/' + currentGrade + '/' + urlSubject + '/' + currentSemester);
+            currentChapter = null;
+            switchSection('step-chapter');
+        }
+
+        // --- 라우팅: 페이지 첫 로드 시 현재 URL 읽어서 화면 띄우기 ---
         window.addEventListener('DOMContentLoaded', () => {
             const path = window.location.pathname;
-            // 빈 문자열 제거하여 경로 배열 생성 (예: /2/korean/1 -> ['2', 'korean', '1'])
             const segments = path.split('/').filter(Boolean);
 
             if (segments.length === 0) {
-                // 루트 (/)
                 switchSection('step-grade');
             } else if (segments.length === 1) {
-                // 예: /2
                 const grade = parseInt(segments[0]);
                 if ([1, 2, 3].includes(grade)) {
-                    selectGrade(grade, false); // URL 변경 없이 화면만 그림
+                    selectGrade(grade, false); 
                 } else {
                     switchSection('step-grade');
                 }
             } else if (segments.length === 2) {
-                // 예: /2/korean
                 const grade = parseInt(segments[0]);
                 const subject = segments[1] === 'korean' ? 'kor' : segments[1];
                 if ([1, 2, 3].includes(grade)) {
@@ -482,13 +616,12 @@
                     if (grade === 2 && subject === 'kor') {
                         goToQuiz(subject, false);
                     } else {
-                        switchSection('step-subject'); // 지원안하는 과목이면 과목리스트 보여줌
+                        switchSection('step-subject'); 
                     }
                 } else {
                     switchSection('step-grade');
                 }
             } else if (segments.length === 3) {
-                // 예: /2/korean/1
                 const grade = parseInt(segments[0]);
                 const subject = segments[1] === 'korean' ? 'kor' : segments[1];
                 const semester = parseInt(segments[2]);
@@ -497,6 +630,31 @@
                     currentGrade = grade;
                     currentSubject = subject;
                     selectSemester(semester, false);
+                } else {
+                    switchSection('step-grade');
+                }
+            } else if (segments.length === 4) {
+                const grade = parseInt(segments[0]);
+                const subject = segments[1] === 'korean' ? 'kor' : segments[1];
+                const semester = parseInt(segments[2]);
+                const chapterId = segments[3];
+                
+                if (grade === 2 && subject === 'kor' && semester === 1) { // 1학기만 바로 진입 허용
+                    currentGrade = grade;
+                    currentSubject = subject;
+                    currentSemester = semester;
+                    
+                    // 단원 렌더링 먼저 수행 (데이터 필요)
+                    document.getElementById('dynamic-chapter-title').innerText = `${grade}학년 ${semester}학기 단원 선택`;
+                    renderChapters(semester);
+
+                    // 선택한 소단원 타이틀 찾기
+                    let foundTitle = "학습 단계 선택";
+                    grade2KoreanData[semester].forEach(c => {
+                        c.subs.forEach(s => { if(s.id === chapterId) foundTitle = s.title; })
+                    });
+                    
+                    selectStudyStep(semester, chapterId, foundTitle, false);
                 } else {
                     switchSection('step-grade');
                 }
@@ -510,19 +668,28 @@
                 currentGrade = state.grade || null;
                 currentSubject = state.subject || null;
                 currentSemester = state.semester || null;
+                currentChapter = state.chapter || null;
 
-                if (state.step === 'study') { switchSection('step-study'); } 
-                else if (state.step === 'semester') { switchSection('step-semester'); } 
+                if (state.step === 'study') { 
+                    switchSection('step-study'); 
+                } 
+                else if (state.step === 'chapter') { 
+                    renderChapters(currentSemester);
+                    switchSection('step-chapter'); 
+                }
+                else if (state.step === 'semester') { 
+                    switchSection('step-semester'); 
+                } 
                 else if (state.step === 'subject') { 
                     renderSubjects(currentGrade);
                     switchSection('step-subject'); 
                 } 
-                else { switchSection('step-grade'); }
+                else { 
+                    switchSection('step-grade'); 
+                }
             } else {
-                // state가 없을 때는 로드 이벤트처럼 URL을 다시 분석
                 const segments = window.location.pathname.split('/').filter(Boolean);
                 if (segments.length === 0) switchSection('step-grade');
-                // 간략화를 위해 그 외의 경우 메인으로
                 else switchSection('step-grade'); 
             }
         });
